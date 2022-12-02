@@ -142,6 +142,7 @@ function initProgram (vertexid, fragmentid) {
   // uniforms that you add to your shaders
   program.uTheTexture = gl.getUniformLocation (program, 'theTexture');
   program.uMountainTexture=gl.getUniformLocation(program,'mountainsTexture');
+  program.uTexVal=gl.getUniformLocation(program,'texVal');
   program.uTheta = gl.getUniformLocation (program, 'theta');
     
   return program;
