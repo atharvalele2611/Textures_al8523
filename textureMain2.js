@@ -96,8 +96,8 @@ function drawCurrentShape () {
       gl.uniform1i(program.uTexVal,0);
     }else if(curTexture == 'myimage'){  // for custom texture
       gl.activeTexture (gl.TEXTURE0+1);
-      gl.bindTexture (gl.TEXTURE_2D, beachTexture);
-      gl.uniform1i (program.uBeachTexture, 1);
+      gl.bindTexture (gl.TEXTURE_2D, mountainsTexture);
+      gl.uniform1i (program.uMountainTexture, 1);
       gl.uniform1i(program.uTexVal,1);
     }else{      // for procedural texture
       gl.uniform1i(program.uTexVal,2);
@@ -141,6 +141,7 @@ function initProgram (vertexid, fragmentid) {
   // uniforms - you will need to add references for any additional
   // uniforms that you add to your shaders
   program.uTheTexture = gl.getUniformLocation (program, 'theTexture');
+  program.uMountainTexture=gl.getUniformLocation(program,'mountainsTexture');
   program.uTheta = gl.getUniformLocation (program, 'theta');
     
   return program;
