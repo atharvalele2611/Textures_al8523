@@ -46,25 +46,31 @@ function doLoad(theTexture, theImage) {
 // set up as well.
 //
 function setUpTextures(){
-    
-    // get some texture space from the gpu
-    worldTexture = gl.createTexture();
-    
-    // load the actual image
-    const worldImage = new Image();
-    worldImage.src = '1_earth_16k.jpg';
+    loadWorldTexture();
+    loadMountainsTexture();
+}
 
-    worldImage.onload = () => {
-        doLoad (worldTexture, worldImage);
-    };
+function loadWorldTexture(){
+  // get some texture space from the gpu
+  worldTexture = gl.createTexture();
+      
+  // load the actual image
+  const worldImage = new Image();
+  worldImage.src = '1_earth_16k.jpg';
 
-    mountainsTexture = gl.createTexture();
-    const mountainsImage = new Image();
-    mountainsImage.src = 'mountains.jpg';
-    mountainsImage.crossOrigin = "";
-    mountainsImage.onload = () => {
-        doLoad (mountainsTexture, mountainsImage);
-    };
+  worldImage.onload = () => {
+      doLoad (worldTexture, worldImage);
+  };
+}
+
+function loadMountainsTexture(){
+  mountainsTexture = gl.createTexture();
+  const mountainsImage = new Image();
+  mountainsImage.src = 'mountains.jpg';
+  mountainsImage.crossOrigin = "";
+  mountainsImage.onload = () => {
+      doLoad (mountainsTexture, mountainsImage);
+  };
 }
 
 //
@@ -89,19 +95,7 @@ function drawCurrentShape () {
     
     // set up texture uniform & other uniforms that you might
     // have added to the shader
-    if(curTexture == 'globe'){   // for globe texture
-      gl.activeTexture (gl.TEXTURE0);
-      gl.bindTexture (gl.TEXTURE_2D, worldTexture);
-      gl.uniform1i(program.uTheTexture, 0);
-      gl.uniform1i(program.uTexVal,0);
-    }else if(curTexture == 'myimage'){  // for custom texture
-      gl.activeTexture (gl.TEXTURE0+1);
-      gl.bindTexture (gl.TEXTURE_2D, mountainsTexture);
-      gl.uniform1i (program.uMountainTexture, 1);
-      gl.uniform1i(program.uTexVal,1);
-    }else{      // for procedural texture
-      gl.uniform1i(program.uTexVal,2);
-    }
+    bindTextures(program);
     
     // set up rotation uniform
     gl.uniform3fv (program.uTheta, new Float32Array(angles));
@@ -110,6 +104,22 @@ function drawCurrentShape () {
     gl.bindVertexArray(object.VAO);
     gl.drawElements(gl.TRIANGLES, object.indices.length, gl.UNSIGNED_SHORT, 0);
     
+}
+
+function bindTextures(program){
+  if(curTexture == 'globe'){   // for globe texture
+    gl.activeTexture (gl.TEXTURE0);
+    gl.bindTexture (gl.TEXTURE_2D, worldTexture);
+    gl.uniform1i(program.uTheTexture, 0);
+    gl.uniform1i(program.uTexVal,0);
+  }else if(curTexture == 'myimage'){  // for custom texture
+    gl.activeTexture (gl.TEXTURE0+1);
+    gl.bindTexture (gl.TEXTURE_2D, mountainsTexture);
+    gl.uniform1i (program.uMountainTexture, 1);
+    gl.uniform1i(program.uTexVal,1);
+  }else{      // for procedural texture
+    gl.uniform1i(program.uTexVal,2);
+  }
 }
 
 // Create a program with the appropriate vertex and fragment shaders
