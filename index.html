@@ -70,6 +70,8 @@
          
          // the texture to use
          uniform sampler2D theTexture;
+         uniform sampler2D mountainsTexture;
+         uniform int texVal;
 
          // Color that is the result of this shader
          out vec4 fragColor;
@@ -81,7 +83,7 @@
              fragColor = texture (theTexture, theUV);
             }
             else if(texVal==1){
-              fragColor=texture(beachTexture,theUV);
+              fragColor=texture(mountainsTexture,theUV);
             }
             else{
               fragColor=theUV.x*purple+theUV.y*pink;
