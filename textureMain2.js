@@ -111,14 +111,14 @@ function bindTextures(program){
     gl.activeTexture (gl.TEXTURE0);
     gl.bindTexture (gl.TEXTURE_2D, worldTexture);
     gl.uniform1i(program.uTheTexture, 0);
-    gl.uniform1i(program.uTexVal,0);
+    gl.uniform1i(program.uTextureValue,0);
   }else if(curTexture == 'myimage'){  // for custom texture
     gl.activeTexture (gl.TEXTURE0+1);
     gl.bindTexture (gl.TEXTURE_2D, mountainsTexture);
     gl.uniform1i (program.uMountainTexture, 1);
-    gl.uniform1i(program.uTexVal,1);
+    gl.uniform1i(program.uTextureValue,1);
   }else{      // for procedural texture
-    gl.uniform1i(program.uTexVal,2);
+    gl.uniform1i(program.uTextureValue,2);
   }
 }
 
