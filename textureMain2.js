@@ -67,7 +67,7 @@ function loadMountainsTexture(){
   mountainsTexture = gl.createTexture();
   const mountainsImage = new Image();
   mountainsImage.src = 'mountains.jpg';
-  mountainsImage.crossOrigin = "";
+  
   mountainsImage.onload = () => {
       doLoad (mountainsTexture, mountainsImage);
   };
@@ -152,7 +152,7 @@ function initProgram (vertexid, fragmentid) {
   // uniforms that you add to your shaders
   program.uTheTexture = gl.getUniformLocation (program, 'theTexture');
   program.uMountainTexture=gl.getUniformLocation(program,'mountainsTexture');
-  program.uTexVal=gl.getUniformLocation(program,'texVal');
+  program.uTextureValue=gl.getUniformLocation(program,'textureValue');
   program.uTheta = gl.getUniformLocation (program, 'theta');
     
   return program;

@@ -71,7 +71,7 @@
          // the texture to use
          uniform sampler2D theTexture;
          uniform sampler2D mountainsTexture;
-         uniform int texVal;
+         uniform int textureValue;
 
          // Color that is the result of this shader
          out vec4 fragColor;
@@ -79,10 +79,10 @@
          void main(void) {
             vec4 red=vec4(1,0,0,1.0);
             vec4 green=vec4(0,1,0,1.0);
-            if(texVal==0){
+            if(textureValue==0){
              fragColor = texture (theTexture, theUV);
             }
-            else if(texVal==1){
+            else if(textureValue==1){
               fragColor=texture(mountainsTexture,theUV);
             }
             else{
